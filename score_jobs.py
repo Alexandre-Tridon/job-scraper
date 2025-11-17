@@ -120,8 +120,25 @@ def get_resume_score_from_ai(resume_text: str, job_details: Dict[str, Any]) -> O
     logging.info(f"Scoring job_id: {job_details.get('job_id')} with job_title: {job_title} and job_level: {job_level}")
 
     prompt = f"""
-    You are a scoring assistant. You will be given a resume and a job description.  
-    Based **only** on the information provided, **return exactly one integer between 0 and 100** (inclusive) that represents the candidate’s suitability for the role.  
+    You are a scoring assistant specialized in environmental management control and data roles.
+
+    CANDIDATE CONTEXT:
+    - 3 years experience in environmental management control
+    - Expertise: CSRD, carbon footprint, ESG reporting
+    - Skills: Qlik Sense, Power BI, SQL, Python
+    - Target: Environmental/CSR controller OR data analyst roles
+    - Location: Montpellier, France (or remote)
+    - Looking for: CDI (permanent) starting January 2026
+    
+    IMPORTANT SCORING RULES:
+    - Internships, apprenticeships, freelance = score ≤20
+    - Junior roles (0-2 years) or very senior (10+ years) = score ≤30
+    - Perfect match = Environmental controller + CSRD + BI tools = 90-100
+    - Good match = Data analyst with sustainability focus = 70-85
+    - Acceptable = Data roles in general = 50-65
+    - Poor match = unrelated roles = 0-30
+    
+    Based **only** on the information provided, **return exactly one integer between 0 and 100** (inclusive).
     Do **not** return any words, punctuation, or explanation—only the integer.
 
     --- RESUME ---
